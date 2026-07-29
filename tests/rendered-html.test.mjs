@@ -58,16 +58,8 @@ test("server-renders the revised homepage", async () => {
   assert.doesNotMatch(html, /id="contact"|Selected work|codex-preview/i);
 });
 
-test("redirects the retired research page and renders all publications", async () => {
-  const researchResponse = await render("/research");
-  assert.ok([307, 308].includes(researchResponse.status));
-  assert.equal(
-    new URL(researchResponse.headers.get("location") ?? "", "http://localhost")
-      .pathname,
-    "/",
-  );
-
-  const publicationsResponse = await render("/publications");
+test("renders all publications", async () => {
+  const publicationsResponse = await render("/publications/");
   assert.equal(publicationsResponse.status, 200);
   const publicationsHtml = await publicationsResponse.text();
   assert.equal(
@@ -84,7 +76,7 @@ test("redirects the retired research page and renders all publications", async (
 });
 
 test("server-renders the Thoughts index and all four sourced essays", async () => {
-  const thoughtsResponse = await render("/thoughts");
+  const thoughtsResponse = await render("/thoughts/");
   assert.equal(thoughtsResponse.status, 200);
   const thoughtsHtml = await thoughtsResponse.text();
   const essayLinks = thoughtsHtml.match(/href="\/thoughts\/[^"]+"/g) ?? [];
@@ -103,13 +95,30 @@ test("server-renders the Thoughts index and all four sourced essays", async () =
   ];
 
   for (const [slug, title] of essays) {
-    const response = await render(`/thoughts/${slug}`);
+    const response = await render(`/thoughts/${slug}/`);
     assert.equal(response.status, 200);
     const html = await response.text();
     assert.match(html, new RegExp(title));
     assert.match(html, /target="_blank"/);
     assert.ok(html.length > 8500);
     assert.doesNotMatch(html, /Sources and further reading|Next field note/);
+  }
+});
+
+test("exports every public route for GitHub Pages", async () => {
+  const staticFiles = [
+    "index.html",
+    "publications/index.html",
+    "thoughts/index.html",
+    "thoughts/before-the-model-runs/index.html",
+    "thoughts/two-clocks/index.html",
+    "thoughts/policy-as-product/index.html",
+    "thoughts/access-is-infrastructure/index.html",
+    "mihir-shah-headshot.jpg",
+  ];
+
+  for (const path of staticFiles) {
+    await access(new URL(`../dist/client/${path}`, import.meta.url));
   }
 });
 
@@ -121,7 +130,6 @@ test("follows the punctuation and implementation brief", async () => {
     "../app/globals.css",
     "../app/publication-data.ts",
     "../app/publications/page.tsx",
-    "../app/research/page.tsx",
     "../app/site-chrome.tsx",
     "../app/thoughts/page.tsx",
     "../app/thoughts/[slug]/page.tsx",
