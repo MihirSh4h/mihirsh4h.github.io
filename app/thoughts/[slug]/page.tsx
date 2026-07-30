@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { essays, getEssay } from "../../content";
+import { essays, formatEssayDate, getEssay } from "../../content";
 import { PageFooter, SiteHeader } from "../../site-chrome";
 
 type EssayPageProps = {
@@ -57,6 +57,9 @@ export default async function EssayPage({ params }: EssayPageProps) {
               ← Thoughts
             </Link>
             <h1>{essay.title}</h1>
+            <p className="article-date">
+              <time dateTime={essay.date}>{formatEssayDate(essay.date)}</time>
+            </p>
             <p>{essay.deck}</p>
           </header>
 

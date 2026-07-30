@@ -476,6 +476,16 @@ body > footer {
   font-size: 0.95rem;
 }
 
+.note-entry > div > p.note-date {
+  margin: 0 0 0.45rem;
+  color: var(--faint);
+  font-size: 0.71rem;
+  font-weight: 600;
+  letter-spacing: 0.055em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
 /* Individual essays */
 
 .article-shell {
@@ -512,6 +522,21 @@ body > footer {
   color: var(--muted);
   font-size: 1.05rem;
   line-height: 1.55;
+}
+
+.article-header > p.article-date {
+  margin: 1.05rem 0 0;
+  color: var(--faint);
+  font-family: var(--body);
+  font-size: 0.71rem;
+  font-weight: 600;
+  letter-spacing: 0.055em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.article-header > p.article-date + p {
+  margin-top: 0.85rem;
 }
 
 .article-body {

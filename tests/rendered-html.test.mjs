@@ -88,16 +88,28 @@ test("renders all publications", async () => {
   assert.doesNotMatch(publicationsHtml, />DOI</);
 });
 
-test("server-renders the Thoughts index and all four sourced essays", async () => {
+test("server-renders the Thoughts index and all six sourced essays", async () => {
   const thoughtsResponse = await render("/thoughts/");
   assert.equal(thoughtsResponse.status, 200);
   const thoughtsHtml = await thoughtsResponse.text();
   const essayLinks = thoughtsHtml.match(/href="\/thoughts\/[^"]+"/g) ?? [];
-  assert.equal(new Set(essayLinks).size, 4);
+  assert.equal(new Set(essayLinks).size, 6);
   assert.doesNotMatch(thoughtsHtml, />Read</);
   assert.doesNotMatch(thoughtsHtml, /\bmin\b|Clinical AI|Public policy/);
 
+  // Dated newest first.
+  const indexDates =
+    thoughtsHtml.match(/datetime="(\d{4}-\d{2}-\d{2})"/gi) ?? [];
+  assert.equal(indexDates.length, 6);
+  assert.deepEqual(indexDates, [...indexDates].sort().reverse());
+  assert.match(thoughtsHtml, /July 26, 2026/);
+
   const essays = [
+    ["proteins-as-design-problems", "Proteins are becoming design problems"],
+    [
+      "what-the-drawdown-selected-for",
+      "What the biotech drawdown selected for",
+    ],
     ["before-the-model-runs", "What healthcare AI gets wrong"],
     ["two-clocks", "Why clinical timelines and venture timelines disagree"],
     ["policy-as-product", "The public sector is a product environment"],
@@ -113,6 +125,7 @@ test("server-renders the Thoughts index and all four sourced essays", async () =
     const html = await response.text();
     assert.match(html, new RegExp(title));
     assert.match(html, /target="_blank"/);
+    assert.match(html, /<time datetime="2026-\d{2}-\d{2}">/i);
     assert.ok(html.length > 8500);
     assert.doesNotMatch(html, /Sources and further reading|Next field note/);
   }
@@ -123,6 +136,8 @@ test("exports every public route for GitHub Pages", async () => {
     "index.html",
     "publications/index.html",
     "thoughts/index.html",
+    "thoughts/proteins-as-design-problems/index.html",
+    "thoughts/what-the-drawdown-selected-for/index.html",
     "thoughts/before-the-model-runs/index.html",
     "thoughts/two-clocks/index.html",
     "thoughts/policy-as-product/index.html",

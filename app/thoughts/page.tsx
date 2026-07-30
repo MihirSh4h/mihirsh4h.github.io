@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { essays } from "../content";
+import { essaysByDate, formatEssayDate } from "../content";
 import { PageFooter, SiteHeader } from "../site-chrome";
 
 export const metadata: Metadata = {
   title: "Thoughts",
   description:
-    "Essays by Mihir Shah on clinical AI, healthcare venture, public policy, and disability access.",
+    "Essays by Mihir Shah on clinical AI, protein engineering, biotech capital, healthcare venture, public policy, and disability access.",
 };
 
 export default function ThoughtsIndex() {
@@ -27,12 +27,17 @@ export default function ThoughtsIndex() {
         </header>
 
         <div className="notes-list index-notes">
-          {essays.map((essay) => (
+          {essaysByDate.map((essay) => (
             <article className="note-entry" key={essay.slug}>
               <div>
                 <h2>
                   <Link href={`/thoughts/${essay.slug}`}>{essay.title}</Link>
                 </h2>
+                <p className="note-date">
+                  <time dateTime={essay.date}>
+                    {formatEssayDate(essay.date)}
+                  </time>
+                </p>
                 <p>{essay.deck}</p>
               </div>
             </article>
