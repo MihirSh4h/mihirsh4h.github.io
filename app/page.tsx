@@ -53,8 +53,12 @@ export default function Home() {
               >
                 UC Berkeley
               </a>
-              . Most of my work asks how a promising biological idea makes it
-              all the way to better care, a question I have approached through
+              .
+            </p>
+
+            <p>
+              Most of my work asks how a promising biological idea makes it all
+              the way to better care, a question I have approached through
               translational biology, dermatology, clinical AI, biotechnology
               investing, public policy, and disability access.
             </p>
