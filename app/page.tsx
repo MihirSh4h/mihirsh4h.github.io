@@ -36,7 +36,7 @@ export default function Home() {
             <SocialLinks />
 
             <p>
-              Hi, I&apos;m Mihir. I am an M.D. candidate at{" "}
+              Hi, I&apos;m Mihir, a medical student at{" "}
               <a
                 href="https://med.stanford.edu/"
                 target="_blank"
@@ -44,9 +44,8 @@ export default function Home() {
               >
                 Stanford School of Medicine
               </a>{" "}
-              with a focus on molecular medicine. Before Stanford, I earned a
-              B.A. with Honors in Molecular and Cell Biology and a minor in
-              Disability Studies from{" "}
+              focused on molecular medicine. Before medical school, I studied
+              Molecular and Cell Biology and Disability Studies at{" "}
               <a
                 href="https://www.berkeley.edu/"
                 target="_blank"
@@ -54,14 +53,16 @@ export default function Home() {
               >
                 UC Berkeley
               </a>
-              .
+              . Most of my work asks how a promising biological idea makes it
+              all the way to better care, a question I have approached through
+              translational biology, dermatology, clinical AI, biotechnology
+              investing, public policy, and disability access.
             </p>
 
             <p>
-              I am interested in the long path from a scientific idea to
-              something that changes how people are cared for. My work has
-              moved between translational biology, dermatology, clinical AI,
-              healthcare investing, public policy, and disability access.
+              I am always happy to talk through an interesting problem, explore
+              a collaboration, or help students find their way into medicine
+              and research. You can reach me at mihir2 [at] stanford [dot] edu.
             </p>
           </div>
         </section>

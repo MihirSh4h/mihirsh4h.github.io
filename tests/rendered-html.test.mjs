@@ -52,6 +52,12 @@ test("server-renders the revised homepage", async () => {
   assert.match(html, /linkedin\.com\/in\/mihirsh4h/);
   assert.match(html, /scholar\.google\.com\/citations/);
   assert.match(html, /github\.com\/MihirSh4h/);
+  assert.match(html, /talk through an interesting problem/);
+  assert.match(html, /mihir2 \[at\] stanford \[dot\] edu/);
+  assert.doesNotMatch(
+    html,
+    /<a[^>]*>\s*mihir2 \[at\] stanford \[dot\] edu\s*<\/a>/,
+  );
   assert.doesNotMatch(html, /href="\/research"/);
   assert.match(html, /href="\/publications"/);
   assert.match(html, /href="\/thoughts"/);
@@ -71,6 +77,13 @@ test("renders all publications", async () => {
   assert.match(publicationsHtml, /semi-automated cerebral microbleed/);
   assert.match(publicationsHtml, /All my peer-reviewed work/);
   assert.match(publicationsHtml, /Google Scholar/);
+  assert.match(
+    publicationsHtml,
+    /American Contact Dermatitis Society Annual Meeting/,
+  );
+  assert.match(publicationsHtml, /MASCC\/ISOO Annual Meeting/);
+  assert.match(publicationsHtml, /ACDS Clinical Research Award/);
+  assert.match(publicationsHtml, /Stanford Medical Scholars Discovery Grant/);
   assert.doesNotMatch(publicationsHtml, /class="publication-number"/);
   assert.doesNotMatch(publicationsHtml, />DOI</);
 });
@@ -130,6 +143,7 @@ test("follows the punctuation and implementation brief", async () => {
     "../app/globals.css",
     "../app/publication-data.ts",
     "../app/publications/page.tsx",
+    "../app/recognition-data.ts",
     "../app/site-chrome.tsx",
     "../app/thoughts/page.tsx",
     "../app/thoughts/[slug]/page.tsx",

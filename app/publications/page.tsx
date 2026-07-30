@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import { publications } from "../publication-data";
+import {
+  presentationVenues,
+  selectedRecognition,
+  type RecognitionItem,
+} from "../recognition-data";
 import { PageFooter, SiteHeader } from "../site-chrome";
 
 export const metadata: Metadata = {
@@ -23,6 +28,21 @@ function Authors({ value }: { value: string }) {
         ),
       )}
     </>
+  );
+}
+
+function RecordList({ items }: { items: RecognitionItem[] }) {
+  return (
+    <ul className="record-inline-list">
+      {items.map((item) => (
+        <li key={`${item.label}-${item.years}`}>
+          <a href={item.href} target="_blank" rel="noreferrer">
+            {item.label}
+          </a>{" "}
+          <span className="record-year">{item.years}</span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -50,6 +70,24 @@ export default function PublicationsPage() {
             .
           </p>
         </header>
+
+        <dl
+          className="academic-record"
+          aria-label="Presentations and selected awards"
+        >
+          <div>
+            <dt>Presented at</dt>
+            <dd>
+              <RecordList items={presentationVenues} />
+            </dd>
+          </div>
+          <div>
+            <dt>Selected awards</dt>
+            <dd>
+              <RecordList items={selectedRecognition} />
+            </dd>
+          </div>
+        </dl>
 
         <div className="publication-years">
           {years.map((year) => (
