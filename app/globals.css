@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #ffffff;
+  --paper: #f7f8f6;
   --ink: #1f1e1c;
   --muted: #67635e;
   --faint: #8c8780;
-  --line: #d9d5cf;
+  --line: #cfd3cc;
   --hover: #4c5b50;
   --display: Charter, "Iowan Old Style", "Palatino Linotype", Georgia, serif;
   --body: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
@@ -31,7 +31,7 @@ body {
 }
 
 ::selection {
-  background: #ece6de;
+  background: #d7e0d4;
 }
 
 a {
